@@ -25,7 +25,7 @@ Notice the double-spaces between nodes, those are called `gaps`. When we use `ga
 
 So what, specifically, does `%+` do? According to the docs it's called a `calt` or `centlus`, and it "calls with pair sample." That means is calls a `gate` with 2 arguments.
 
-Going back to `(add 2 2)` and `%^  add  2  2` for a moment, what's the difference between these two syntaxes, why does one require a rune, and the other doesn't? The difference lies within a Hoon concept called "regular" and "irregular" forms (as well as "tall" vs "flat", which we'll explore later). `%^  add  2  2` is the *regular* form, while `(add 2 2)` is the *irregular* form. You can think of irregular form as syntactic sugar. Here is some official documentation on "tall regular form."
+Going back to `(add 2 2)` and `%+  add  2  2` for a moment, what's the difference between these two syntaxes, why does one require a rune, and the other doesn't? The difference lies within a Hoon concept called "regular" and "irregular" forms (as well as "tall" vs "flat", which we'll explore later). `%+  add  2  2` is the *regular* form, while `(add 2 2)` is the *irregular* form. You can think of irregular form as syntactic sugar. Here is some official documentation on "tall regular form."
 
 > Tall regular form starts with the sigil, followed by a gap (any whitespace except ace), followed by a bulb whose twigs are separated by gap.
 
