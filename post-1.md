@@ -21,11 +21,11 @@ Looks a lot like lisp. Here's another way to do the same thing:
 %+  add  2  2
 ```
 
-Notice the double-spaces between nodes, those are called `gaps`. When we use `gaps` to delimit the nodes in our expression (also known as `twig` in hoon), we can omit the parentheses. So what's the `%+` symbol mean? It's called a `rune`, there are a lot of them in Hoon and they all do different things.
+Notice the double-spaces between nodes, those are called `gaps`. When we use `gaps` to delimit the elements in our expression (also known as a `twig` in hoon), we can omit the parentheses. So what's the `%+` symbol mean? It's called a `rune`, there are a lot of them in Hoon and they all do different things.
 
 So what, specifically, does `%+` do? According to the docs it's called a `calt` or `centlus`, and it "calls with pair sample." That means is calls a `gate` with 2 arguments.
 
-Going back to `(add 2 2)` and `%^  add  2  2` for a moment, what's the difference between these two syntaxes, why does one require a rune, and the other doesn't? The difference lies within a Hoon concept called "regular" and "irregular" forms (as well as "tall" vs "flat", which we'll explore later). `%^  add  2  2` is the *regular* form, while `(add 2 2)` is the *irregular* form. You can think of irregular form as essentially syntactic sugar. Here is some official documentation on "tall regular form."
+Going back to `(add 2 2)` and `%^  add  2  2` for a moment, what's the difference between these two syntaxes, why does one require a rune, and the other doesn't? The difference lies within a Hoon concept called "regular" and "irregular" forms (as well as "tall" vs "flat", which we'll explore later). `%^  add  2  2` is the *regular* form, while `(add 2 2)` is the *irregular* form. You can think of irregular form as syntactic sugar. Here is some official documentation on "tall regular form."
 
 > Tall regular form starts with the sigil, followed by a gap (any whitespace except ace), followed by a bulb whose twigs are separated by gap.
 
@@ -76,13 +76,13 @@ So now that we have a gate, let's try and call it. We used `%+` (cenlus) before 
 > ###### :call %- "cenhep"
 > `{$call p/seed q/seed}`: call a gate (function).
 
-Again we have two samples (both seeds). The first, `p` is the `gate` we wish to call, and `q` is the argument. Let's try it.
+Again we have two legs (both seeds). The first, `p` is the `gate` we wish to call, and `q` is the argument. Let's try it.
 
 ```
 %-(|=(a/@ a) 5)
 ```
 
-Again, I'm using the flat, regular form for `%-` here. The first twig is the `gate` we created before, and the second twig is the sample `5`. If you recall from the previous seciton where we used `%+` to call `add`, the first twig was `add` which is gate that's build into the Hoon standard library. So, essentially here we are forming a `gate` and calling it in place. Neat!
+Again, I'm using the flat, regular form for `%-` here. The first twig is the `gate` we created before, and the second twig is the sample `5`. If you recall from the previous seciton where we used `%+` to call `add`, the first twig was `add` which is gate that's built into the Hoon standard library. So, essentially here we are forming a `gate` and calling it in place. Neat!
 
 Now let's modify our example to take two `samples`.
 
@@ -144,7 +144,7 @@ Sure can! Let's back up for a moment. You may have noticed something in the prev
 > `{$coat p/@tas q/moss}`: mold which wraps a face around another mold.
 
 
-Again we see that `$=` is moldy just like `$:` (and they both start with `$`, see pattern?
+Again we see that `$=` is moldy just like `$:` (and they both start with `$`, see the pattern?)
 
 And so the totally regular (and flat) version of our last code sample is:
 

@@ -43,7 +43,7 @@ Let's go through this step by step. The first rune, `=|` essentially declares a 
 
 In this case, `a/@` is our `p/moss`, and `q/seed` will be our core that we're creating. This allows the "defaulted mold" (`a/@`) to be available in the subject (our core).
 
-Next, `|%` creates a new core, `++` adds a new `arm` (attribute) onto the core called `$` (the empty name), and `a` is its subject of that arm (just returning a here without doing anything to it). Finally `--` is used to tell Hoon we're doing making our core.
+Next, `|%` creates a new core, `++` adds a new `arm` (attribute) onto the core called `$` (the empty name), and `a` is its subject of that arm (just returning `a` here without doing anything to it). Finally `--` is used to tell Hoon we're doing making our core.
 
 And there we have it, a one-armed core with sample. Now we should be able to call this core just like we called the gate:
 
@@ -62,7 +62,7 @@ dojo> %~($ foo 1)
 1
 ```
 
-Notice the `$`? That's the single arm of the core we made. In this case `p` is our `gate` (remember, just a `core` with one `arm`), and q is the argument we're passing to it. The fact that the anonymous gate is called `$` means you can even recurse inside of one with `$()`
+Notice the `$`? That's the single arm of the core we made. In this case `p` is our `gate` (remember, just a `core` with one `arm`), and q is the argument we're passing to it. The fact that the anonymous gate is actually called `$` means you can even call it again from within its own body!
 
 ```
 |=  {a/@ b/@}
@@ -78,4 +78,4 @@ There are a couple new things here. First the `?:` stem is essentially an if/els
 
 The first leg, `p`, is the condition to test, the second, `q`,  executes on true, and the third, `r`, executes on false. The second new thing is the `(add p q)` gate which is part of the standard library and should be pretty self explanatory.
 
-The interesting part here is `$(a (add a 1))`, which calls the same empty-named gate (`$`) that it's inside of, essentially recursing.
+The interesting part here is `$(a (add a 1))`, which calls the same empty-named gate (`$`) that it's inside of, essentially recursing. (I'm not sure why `a` needs to be the first leg).
