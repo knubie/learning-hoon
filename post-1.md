@@ -1,24 +1,29 @@
 ---
 date: ~2016.6.23
-title: Learning Hoon - Part 1: gates
+author: Matthew Steedman
+title: Learning Hoon - Part 1: Gates
 type: post
-navhome: /blog
+navhome: /learning-hoon
+navdpad: false
+navmode: navbar
+sort: 2
+next: true
 ---
 
-I'm a programmer but I wouldn't say I'm a very good one. I don't have a computer science or math degree. I don't know much C or or low level systems programming. I just like to fiddle around with code and make things. So, join me as I fumble my way around learning Urbit's programming language: Hoon.
+This seems like as good a place to start as any. 
 
 ## Let's call a `gate`
 
 According to the docs, a gate is like a function. The reason these aren't just called "functions" is to differentiate them from other mathematical-style functions in the Urbit world. For instance, a Nock formula is also a function (whatever that means!). So, here is one way to call a gate:
 
 ```
-(add 2 2)
+dojo> (add 2 2)
 ```
 
 Looks a lot like lisp. Here's another way to do the same thing:
 
 ```
-%+  add  2  2
+dojo> %+  add  2  2
 ```
 
 Notice the double-spaces between nodes, those are called `gaps`. When we use `gaps` to delimit the elements in our expression (also known as a `twig` in hoon), we can omit the parentheses. So what's the `%+` symbol mean? It's called a `rune`, there are a lot of them in Hoon and they all do different things.
@@ -63,7 +68,9 @@ Now that we've played around with different ways to call a `gate`, let's see if 
 > ###### :gate |= "bartis"
 > `{$gate p/moss q/seed}`: form a gate, a dry one-armed core with sample.
 
-Don't worry right now what a "dry one-armed core" is, we'll get into that later. Take a look at this notation: `{$gate p/moss q/seed}`. That's our `twig`. The `$gate` is the `stem`, and `p/moss q/seed` is the bulb. `p/moss` and `q/seed` are *subexpressions*, or `legs` of the bulb. We'll explain what `moss` and `seed` mean later. For now, let's use `|=` to make a simple gate.
+Don't worry right now what a "dry one-armed core" is, we'll get into that later. Take a look at this notation: `{$gate p/moss q/seed}`. That's our `twig`. A twig in Hoon is an expression, and they all start with some `rune`, and take a specific number of children (which themselves are either twigs, or some literal that produces its own value). That's why we don't need to 'close' or end our expressions (e.g. with a `;`) in tall regular form, because each rune knows exactly how many children to expect (except for the ones that don't, which we'll see later).
+
+The `$gate` is the `stem`, and `p/moss q/seed` is the bulb. `p/moss` and `q/seed` are *subexpressions*, or `legs` of the bulb. We'll explain what `moss` and `seed` mean later. For now, let's use `|=` to make a simple gate.
 
 ```
 |=(a/@ a)
