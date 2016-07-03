@@ -1,8 +1,14 @@
 ---
 date: ~2016.6.23
-title: Learning Hoon - Part 2: molds
+author: Matthew Steedman
+title: Learning Hoon - Part 4: Molds
 type: post
-navhome: /blog
+navhome: /learning-hoon
+navdpad: false
+navmode: navbar
+sort: 5
+hide: true
+next: true
 ---
 
 In the previous post we explored gates and different ways of calling and making them. One thing we noticed is that making a gate requires things called `molds` which we don't know much about yet. So let's explore them.
@@ -58,3 +64,9 @@ dojo> (@ux 1)
 
 
 A lot of the documentation for different `stems` shows the bulb's legs as either `moss` or `seed`. What are they? Well to keep things brief, a `moss` is a twig that produces a `mold` and a `seed` is a twig that produces anything else. You can read more about `moss` and `seed` [here](http://urbit.org/docs/hoon/twig/).
+
+
+---
+
+those are functions whose range of possible outputs
+are used to define a span at compile time

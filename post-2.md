@@ -1,8 +1,13 @@
 ---
 date: ~2016.6.23
-title: Learning Hoon - Part 2: cores
+author: Matthew Steedman
+title: Learning Hoon - Part 2: Cores
 type: post
-navhome: /blog
+navhome: /learning-hoon
+navdpad: false
+navmode: navbar
+sort: 3
+next: true
 ---
 
 In the previous post we explored gates a bit which are just "dry one-armed cores with sample". In Hoon, a `core` is a bit like an object in other languages. Its members/attributes are called `arms`. So now let's explore `cores` a bit.
@@ -18,7 +23,7 @@ When we created a `gate` earlier, what we really created was a `core` with one `
 --
 ```
 
-The first rune `|%` creates a new core, then `++` creates a new `arm` on that `core` named 'bar' with the value of "Hello!". Finally the `--` tells hoon we're done adding `arms`. If we were to assign this `core` to a variable in the dojo like: `=foo |%  ++  bar  "hello"  --` we could then access its arm like this: `bar.foo`. Notice how the attribute accessor syntax is backwards compared to most other languages. If this `core` was written in javascript it might look something like this:
+The first rune `|%` creates a new core, then `++` creates a new `arm` on that `core` named 'bar' with the value of "Hello!". Finally the `--` tells hoon we're done adding `arms`. Because `|%` is one of those rare stems that don't know how many children to expect, we need to end the twig with `--` when we're done. If we were to assign this `core` to a variable in the dojo like: `=foo |%  ++  bar  "hello"  --` we could then access its arm like this: `bar.foo`. Notice how the attribute accessor syntax is backwards compared to most other languages. If this `core` was written in javascript it might look something like this:
 
 ```
 { bar: "Hello!" }
@@ -38,7 +43,7 @@ So now that we know, roughly, what cores are, here's what our gate from [part 1]
 --
 ```
 
-Let's go through this step by step. The first rune, `=|` essentially declares an uninitialized variable (`a/@`) to be used in the following twig (the subject, our `core`).
+Let's go through this step by step. The first rune, `=|` essentially declares an uninitialized variable (`a/@`) to be used in the following twig (the [subject](/post-3), our `core`).
 
 > ###### :new =| , "tisbar"
 > `{$new p/moss q/seed}`: combine a defaulted mold with the subject.
@@ -73,7 +78,7 @@ The truth is, gates are a type of core, yes, but more generally they are a type 
 --
 ```
 
-I should note that you can use `|_` to make doors explicitly in the same way we use `|=` to make gates explicitly without having to construct the core manually.
+I should note that you can use `|_` to make doors explicitly in the same way we use `|=` to make gates explicitly without having to construct the core manually. Notice how `|_`, `|=` and `|%` all begin with `|`? That's because they all belong to the [Core family of runes](http://urbit.org/docs/hoon/twig/bar-core/).
 
 ```
 |_  a/@
@@ -128,7 +133,7 @@ The interesting part here is `$(a (add a 1))`, which calls the same empty-named 
 > ###### :make %= "centis"
 > `{$make p/wing q/(list (pair wing seed))}`: take a wing with changes.
 
-Here, `p/wing` is referring to some "attribute", in this case `$`, an arm on a core. The following twig, `q/(list (pair wing seed))` is a list of `wing seed` pairs. We already know that a wing is like an attribute, and a seed could be anything. Those pairs represent the attribute we want to change, and what we want to change it to. Going back to our example, `%=($ a (add a 1))`, we have `$` as our `p/wing` and `a (add a 1)` as our `q/(list (pair wing seed))`. So within the context of `$`, we're changing `a` to be `(add a 1)`.
+Here, `p/wing` is referring to some "attribute", in this case `$`, an arm on a core. The following twig, `q/(list (pair wing seed))` is a list of `wing seed` pairs. We already know that a wing is like an attribute, and a seed could be anything. Those pairs represent the attribute we want to change, and what we want to change it to. Going back to our example, `%=($ a (add a 1))`, we have `$` as our `wing` and `a (add a 1)` as our `(list (pair wing seed))`. So within the context of `$`, we're changing `a` to be `(add a 1)`.
 
 But why can't we just call `($ (add a 1))` like a normal gate? Because `$` *isn't* a gate. Remember, a gate is a *core* and `$` is an arm on that core (the only arm, in fact). Further, `%=` isn't just limited to arms on a core. It works for other `limbs` (attributes) as well. Take the following example:
 
