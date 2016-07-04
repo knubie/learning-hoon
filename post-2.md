@@ -1,7 +1,6 @@
 ---
 date: ~2016.6.23
-author: Matthew Steedman
-title: Learning Hoon - Part 2: Cores
+title: Part 2: Cores
 type: post
 navhome: /learning-hoon
 navdpad: false
@@ -48,9 +47,9 @@ Let's go through this step by step. The first rune, `=|` essentially declares an
 > ###### :new =| , "tisbar"
 > `{$new p/moss q/seed}`: combine a defaulted mold with the subject.
 
-In this case, `a/@` is our `p/moss`, and `q/seed` will be our core that we're creating. This allows the "defaulted mold" (`a/@`) to be available in the subject (our core).
+In this case, `a/@` is our `p/moss`, and `q/seed` will be our core that we're creating. This allows the "defaulted mold" (`a/@`) to be available in the subject (our core). This variable will later act as the "argument" (or sample in hoonspeak).
 
-Next, `|%` creates a new core, `++` adds a new `arm` (attribute) onto the core called `$` (the empty name), and `a` is the subject of that arm (just returning `a` here without doing anything to it). Finally `--` is used to tell Hoon we're doing making our core.
+Next, the `core` twig is similar to the one we made above, except instead of an armed name `foo` we're calling it `$`, and returning `a`.
 
 And there we have it, a one-armed core with sample. Now we should be able to call this core just like we called the gate:
 
@@ -88,7 +87,7 @@ I should note that you can use `|_` to make doors explicitly in the same way we 
 --
 ```
 
-Notice that we've only declared one sample to be used amongst all the arms. Doors are unique in Hoon, in that there are no real equivalents in other languages. They're useful when you need to create multiple functions with the same signature. Assuming we store this core in a variable named `foo`, we can call its arms with `%~` like this:
+Notice that we've only declared one sample to be used amongst all the arms. Doors are unique in Hoon, in that there are no real equivalents in other languages. They're useful when you need to create multiple functions with the same signature. Assuming we store this core in a variable named `foo`, we can call its arms with with the rune `%~` (which is aptly named `:open`) like this:
 
 ```
 dojo> %~(add-one foo 3)
@@ -112,7 +111,11 @@ dojo> %~($ foo 1)
 1
 ```
 
-Notice the `$`? That's the single, unnamed arm of the core we made. In this case `foo` is our `gate` (remember, just a `core` with one `arm`), and `1` is the argument we're passing to it. The fact that the anonymous arm is actually called `$` means you can even call it again from within its own body! Let's try it:
+Notice the `$`? That's the single, unnamed arm of the core we made. In this case `foo` is our `gate` (remember, just a `core` with one `arm`), and `1` is the argument we're passing to it. The fact that the anonymous arm is actually called `$` means you can even call it again from within itself!
+
+## A gate that opens itself
+
+Let's see what a recursive gate looks like in hoon:
 
 ```
 |=  {a/@ b/@}
@@ -126,7 +129,7 @@ There are a couple new things here. First the `?:` stem is essentially an if/els
 > ###### :if ?: "wutcol"
 > `{$if p/seed q/seed r/seed}`: branch on a boolean test.
 
-The first leg, `p`, is the condition to test, the second, `q`,  executes on true, and the third, `r`, executes on false. The second new thing is the `(add p q)` gate which is part of the standard library and should be pretty self explanatory.
+The first leg, `p`, is the condition to test, the second, `q`,  executes on true, and the third, `r`, executes on false. The other two new things are the `(add p q)` and `(lte p q) gates which are part of the standard library and should be pretty self explanatory (lte stands for less than or equal to).
 
 The interesting part here is `$(a (add a 1))`, which calls the same empty-named arm (the gate itself, `$`) that it's inside of, essentially recursing. Curiously enough, though, the syntax is a bit different. We're not writing `($ (add a 1))` (the irregular form of `%-`). The syntax we're using is actually the irregular form of `%=`, which looks like `%=($ a (add a 1))` in regular form. Let's look at the documentation for `%=`.
 

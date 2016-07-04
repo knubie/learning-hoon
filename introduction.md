@@ -1,7 +1,6 @@
 ---
 date: ~2016.6.23
-author: Matthew Steedman
-title: Learning Hoon - Introduction
+title: Introduction
 type: post
 navhome: /learning-hoon
 navdpad: false
