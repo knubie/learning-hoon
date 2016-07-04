@@ -28,7 +28,7 @@ The first rune `|%` creates a new core, then `++` creates a new `arm` on that `c
 { bar: "Hello!" }
 ```
 
-So now that we know, roughly, what cores are, here's what our gate from [part 1](/post-1) looks like as a core.
+So now that we know, roughly, what cores are, here's what our gate from [part 1](/part-1) looks like as a core.
 
 ```
 :: This gate:
@@ -42,7 +42,7 @@ So now that we know, roughly, what cores are, here's what our gate from [part 1]
 --
 ```
 
-Let's go through this step by step. The first rune, `=|` essentially declares an uninitialized variable (`a/@`) to be used in the following twig (the [subject](/post-3), our `core`).
+Let's go through this step by step. The first rune, `=|` essentially declares an uninitialized variable (`a/@`) to be used in the following twig (the [subject](/part-3), our `core`).
 
 > ###### :new =| , "tisbar"
 > `{$new p/moss q/seed}`: combine a defaulted mold with the subject.

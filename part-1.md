@@ -110,7 +110,7 @@ When we combine our first two twigs into one, it needs to be a `moss`. What's `m
 
 > We use moss to describe twigs whose product is used as a mold, and seed for twigs whose product could be anything.
 
-What's a `mold`? It's essentially a type constructor. `a/@` is *moldy* (it's a `moss`) because its product is a mold. Without worrying too much about [what a mold is](/post-4), we just know we need a moldy twig to replace these two `a/@` and `b/@` parameters. The `$:` stem let's us pass in a list of `moss` that creates a mold which will recognize a tuple argument.
+What's a `mold`? It's essentially a type constructor. `a/@` is *moldy* (it's a `moss`) because its product is a mold. Without worrying too much about [what a mold is](/part-4), we just know we need a moldy twig to replace these two `a/@` and `b/@` parameters. The `$:` stem let's us pass in a list of `moss` that creates a mold which will recognize a tuple argument.
 
 > ###### :bank $: "buccol"
 > `{$bank p/(list moss)}`: form a mold which recognizes a tuple.
