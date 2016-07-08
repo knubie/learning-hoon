@@ -1,6 +1,6 @@
 ---
 date: ~2016.6.23
-title: Part 2: Cores
+title: Part 2 - Cores
 type: post
 navhome: /learning-hoon
 navdpad: false
@@ -146,7 +146,3 @@ But why can't we just call `($ (add a 1))` like a normal gate? Because `$` *isn'
 ```
 
 Remember `=|`? It 'declares' an uninitialized (or, defaulted) variable to be used in the subject. As you may have guessed, `=+` is very similar but it declares an initialized variable. Now that that's out of the way, let's look at `a(b 0)` (the irregular form of `%=(a b 0)`. Here, `a` is our first wing. It's a wing (or attribute) of the entire expression (the subject), while `b` is a wing of `a`.
-
-## Scope, how does that work?
-
-Coming soon...

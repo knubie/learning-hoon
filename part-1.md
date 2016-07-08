@@ -1,6 +1,6 @@
 ---
 date: ~2016.6.23
-title: Part 1: Gates
+title: Part 1 - Gates
 type: post
 navhome: /learning-hoon
 navdpad: false
@@ -75,7 +75,7 @@ The `$gate` is the `stem`, and `p/moss q/seed` is the bulb. `p/moss` and `q/seed
 |=(a/@ a)
 ```
 
-Alright, there's our gate. You may have noticed I'm using the *flat* regular form here. The first twig, `a/@` is our `sample` or argument. It's name is `a` and `@` is its type. The `@` type (called an `atom`) is basically just an unsigned integer of any size. The second twig is the function body. Here I'm just returning `a` without doing anything with it.
+Alright, there's our gate. You may have noticed I'm using the *flat* regular form here. The first twig, `a/@` is our `sample` or argument. It's name is `a` and `@` is its type. The `@` type (called an `atom`) is basically just an [unsigned integer](https://en.wikipedia.org/wiki/Signedness) of any size. The second twig is the function body. Here I'm just returning `a` without doing anything with it.
 
 So now that we have a gate, let's try and call it. We used `%+` (cenlus) before to call `add`. But if you recall `%+` is only used to call a gate with a pair sample. Our new gate we just made only has one sample, so we'll use `%-` (cenhep) instead (notice how they both begin with `%`, this is not by accident. `%^` calls a gate with triple sample). Let's briefly look at the documentation for `%-`.
 

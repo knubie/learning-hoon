@@ -1,11 +1,12 @@
 ---
 date: ~2016.6.23
-title: Part 3: Subjects
+title: Part 3 - Subjects
 type: post
 navhome: /learning-hoon
 navdpad: false
 navmode: navbar
 sort: 4
+next: true
 ---
 
 In part 2 we talked about cores, how they relate to gates, and how their attributes work. Part of that post dealt with declaring variables to be used within a core, as well as attributes (`arms`) of a core, and how they are related. In part 3 we'll explore the concept of variables, attributes, and scope within Hoon.
@@ -99,21 +100,27 @@ Another thing you may have noticed in this example is that the `sum` arm in this
 
 > Each twig in the battery source is compiled to a formula, with the core itself as the subject. The battery is a tree of these formulas, or arms. An arm is a computed attribute against its core.
 
+<img src="https://dl.dropboxusercontent.com/s/gvfu7hxjbjmxvtr/core.png" alt="tisbar" width="600"/>
+
 ## An arm and a leg
 
 Since cores contain their own context, we can access the attributes defined in its context. Remember when we used attribute accessor syntax `arm.core` to access an arm on a core? We can also use this syntax to access "variables" (named values, or values with a `face`) defined in its context:
 
 ```
-dojo> =foo =|  a=5
-dojo< |%  ++  bar  10  --
+dojo> =bar =|  a=5
+dojo< |%  ++  foo  10  --
 
-dojo> bar.foo
+dojo> foo.bar
 10
-dojo> a.foo
+dojo> a.bar
 5
 ```
 
-Notice that we can access both `bar` and `a` the same way in the core `foo`. That's because they are both attributes (`limbs`) of the core, but there is a difference. `foo` is a "computed formula", so it's called an `arm`, while `a` is "defined as a subtree of the core", it's refered to as a `leg`.
+Notice that we can access both `foo` and `a` the same way in the core `bar`. That's because they are both attributes (`limbs`) of the core, but there is a difference. `foo` is a "computed formula", so it's called an `arm`, while `a` is "defined as a subtree of the core", it's refered to as a `leg`.
+
+> A limb, like `foo`, is Hoon's equivalent of a variable reference.
+>
+> To resolve limb `foo`, [the compiler] searches the subject depth-first, head-first for either a face named `foo`, or a core with the arm foo. If it finds a face, the product is a leg, or subtree of the subject. If it finds a core, it computes the arm formula with that core as the subject.
 
 Remember when we used the `(add a b)` gate that came from the standard library? You guessed it, the standard library is just a giant core that serves as the subject for the rest of our program, and `add` is just one of its many arms. In fact, here's the source code for `add`:
 
@@ -126,4 +133,4 @@ Remember when we used the `(add a b)` gate that came from the standard library? 
   $(a (dec a), b +(b))
 ```
 
-Can you figure out what's going on in this arm based on what we've learned in the previous chapters? (You can safely ignore the `~/  %add` line for now).
+Can you figure out what's going on in this arm based on what we've learned in the previous chapters? (You can safely ignore the `~/  %add` line for now, also here is the [doc page](http://urbit.org/docs/hoon/twig/ket-cast/hep-cast/) on `^-`).
